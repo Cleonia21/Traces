@@ -65,6 +65,7 @@ func (l *Level) getByAlphabet(m map[int]string) [][]string {
 }
 
 func (l *Level) New(columns int) {
+	fmt.Println("New call with columns ", columns)
 	l.init(columns)
 
 	var i int

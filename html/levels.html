@@ -1,0 +1,66 @@
+{{define "home"}}
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <link rel="stylesheet" href="/css/levels.css">
+    <script src="../js/levels.js" defer></script>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@100&display=swap" rel="stylesheet">
+    <title>Traces</title>
+</head>
+<body>
+
+<header class="header">
+    <div class="container">
+        <div class="header_inner">
+            <div class="logo"></div>
+
+        </div>
+    </div>
+</header>
+
+<div class="intro">
+    <div class="container">
+        <div class="intro_inner">
+            <button id="word_update">Обновить слова</button>
+        </div>
+        <table class="intro_title" id="word_table"></table>
+        <div class="intro_inner">
+            <button id="fingers_update">Обновить пальцы</button>
+        </div>
+        <table class="intro_title" id="fingers_table"></table>
+    </div>
+</div>
+
+</body>
+</html>
+{{end}}
+
+<!--            <nav>-->
+<!--                <a href="#">button1</a>-->
+<!--                <a href="#">button2</a>-->
+<!--                <a href="#">button3</a>-->
+<!--                <a href="#">button4</a>-->
+<!--                <a href="#">button5</a>-->
+<!--            </nav>-->
+
+
+<!--            <form class="button_title">-->
+<!--                <button onclick="loadMore()" >Обновить</button>-->
+<!--            </form>-->
+
+<!--            <div id="nextBatch"></div>-->
+
+<!--            <table class="intro_title">-->
+<!--                {{range .}}-->
+<!--                    <tr>-->
+<!--                        {{range .}}-->
+<!--                            <td>{{ . }}</td>-->
+<!--                        {{end}}-->
+<!--                    </tr>-->
+<!--                {{end}}-->
+<!--            </table>-->
+
+
