@@ -42,6 +42,40 @@ fingers_update.onclick = async function () {
     make_table(fingers_table, response)
 }
 
+const download_file = document.getElementById("download_file")
+
+download_file.onclick = async function () {
+    let url = "/download_file"
+    let options = {
+        method: 'GET',
+        headers: new Headers({
+            'Content-Type': 'application/json',
+        }),
+        mode: 'cors',
+        cache: 'default'
+    };
+    let strFileName;
+
+    //Perform a GET Request to server
+    fetch(url, options)
+        .then(function (response) {
+            let contentType = response.headers.get("Content-Type"); //Get File name from content type
+            // strMimeType = "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet";
+            strFileName = contentType.split(";")[1];
+            return response.blob();
+
+        }).then(function (myBlob) {
+        let downloadLink = window.document.createElement('a');
+        downloadLink.href = window.URL.createObjectURL(new Blob([myBlob]));
+        downloadLink.download = strFileName;
+        document.body.appendChild(downloadLink);
+        downloadLink.click();
+        document.body.removeChild(downloadLink);
+    }).catch((e) => {
+        console.log("e", e);
+    });
+}
+
 // word_update.addEventListener("click", async function () {
 //     let response = await fetch("/get_words", {method: "POST"});
 //

@@ -50,6 +50,7 @@ func (l *Level) GetNums() [][]string {
 	for i := 0; i < l.columns; i++ {
 		m[i] = strconv.Itoa(i)
 	}
+	//fmt.Println("GetNums map:", m)
 	return l.getByAlphabet(m)
 }
 
@@ -58,14 +59,36 @@ func (l *Level) getByAlphabet(m map[int]string) [][]string {
 	for i := 0; i < l.lines; i++ {
 		strArray[i] = make([]string, l.columns)
 		for j := 0; j < l.columns; j++ {
-			strArray[i][j] += m[l.matrix[i*l.lines+j]]
+			strArray[i][j] += m[l.matrix[i*l.columns+j]]
 		}
 	}
 	return strArray
 }
 
+func (l *Level) GetStrings() []string {
+	m := map[int]string{
+		0: "дом",
+		1: "кот",
+		2: "лес",
+		3: "стол",
+		4: "звон",
+		5: "брат",
+		6: "мост",
+		7: "час",
+		8: "вол",
+		9: "рев",
+	}
+	strs := make([]string, l.lines)
+	for i := 0; i < l.lines; i++ {
+		for j := 0; j < l.columns; j++ {
+			strs[i] += m[l.matrix[i*l.columns+j]] + " "
+		}
+	}
+	return strs
+}
+
 func (l *Level) New(columns int) {
-	fmt.Println("New call with columns ", columns)
+	//fmt.Println("New call with columns ", columns)
 	l.init(columns)
 
 	var i int
@@ -163,10 +186,12 @@ func (l *Level) delete(a []int, val int) []int {
 }
 
 func (l *Level) print() {
+	fmt.Println("Level print function:")
 	for i := 0; i < len(l.matrix); i++ {
 		if i%l.columns == 0 && i != 0 {
 			fmt.Println()
 		}
 		fmt.Print(l.matrix[i], " ")
 	}
+	fmt.Println()
 }
