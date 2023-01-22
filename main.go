@@ -149,17 +149,34 @@ func getWords(w http.ResponseWriter, r *http.Request, p httprouter.Params) {
 }
 
 func getFingers(w http.ResponseWriter, r *http.Request, p httprouter.Params) {
-	const firstSeriesLen = 6
+	const firstSeriesLen = 3
 	const maxSeriesLen = 10
 
 	var responseData DataOutput
 	responseData.Data = make([][][]string, maxSeriesLen-firstSeriesLen+1)
 	responseData.Result = "ok"
 
+	file, err := os.OpenFile("last_level.txt", os.O_APPEND|os.O_WRONLY, 0600)
+	if err != nil {
+		fmt.Println("Unable to open file:", err)
+		os.Exit(1)
+	}
+	defer file.Close()
+
 	var l levels.Level
 	for i := 0; i < maxSeriesLen-firstSeriesLen+1; i++ {
-		l.New(i + 6)
-		responseData.Data[i] = l.GetNums()
+		l.New(i + firstSeriesLen)
+		strs := l.GetFingers()
+		responseData.Data[i] = strs
+
+		for j := 0; j < len(strs); j++ {
+			_, err = file.WriteString(strings.Join(strs[j], " ") + "\n")
+			if err != nil {
+				fmt.Println("Unable to write file:", err)
+				os.Exit(1)
+			}
+		}
+		_, _ = file.WriteString("\n")
 	}
 	_ = json.NewEncoder(w).Encode(responseData)
 	return

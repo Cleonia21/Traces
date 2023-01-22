@@ -36,10 +36,10 @@ async function make_tables() {
     };
     console.log(data.Type)
     let response1 = await fetch("/get_words", {method: "POST", body: JSON.stringify(data)});
-    // let response2 = await fetch("/get_fingers", {method: "POST", body: JSON.stringify(data)});
+    let response2 = await fetch("/get_fingers", {method: "POST"});
 
     make_table(word_table, response1)
-    // make_table(fingers_table, response2)
+    make_table(fingers_table, response2)
 }
 
 update.onclick = async function () {

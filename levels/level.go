@@ -49,7 +49,20 @@ func (l *Level) GetLetters() [][]string {
 func (l *Level) GetNums() [][]string {
 	m := make(map[int]string, l.columns)
 	for i := 0; i < l.columns; i++ {
-		m[i] = strconv.Itoa(i)
+		m[i] = strconv.Itoa(i + 1)
+	}
+	//fmt.Println("GetNums map:", m)
+	return l.getByAlphabet(m)
+}
+
+func (l *Level) GetFingers() [][]string {
+	m := make(map[int]string, l.columns)
+	for i := 0; i < l.columns; i++ {
+		if i > 4 {
+			m[i] = strconv.Itoa(i - 5 + 1)
+		} else {
+			m[i] = strconv.Itoa(i + 1)
+		}
 	}
 	//fmt.Println("GetNums map:", m)
 	return l.getByAlphabet(m)
