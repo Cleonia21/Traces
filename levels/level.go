@@ -8,9 +8,10 @@ import (
 )
 
 type Level struct {
-	lines   int
-	columns int
-	matrix  []int
+	lines         int
+	columns       int
+	matrix        []int
+	pseudoColumns bool
 }
 
 func (l *Level) GetWords() [][]string {
@@ -59,7 +60,11 @@ func (l *Level) getByAlphabet(m map[int]string) [][]string {
 	for i := 0; i < l.lines; i++ {
 		strArray[i] = make([]string, l.columns)
 		for j := 0; j < l.columns; j++ {
-			strArray[i][j] += m[l.matrix[i*l.columns+j]]
+			if l.pseudoColumns && j+1 == l.columns {
+				strArray[i][j] = ""
+			} else {
+				strArray[i][j] += m[l.matrix[i*l.columns+j]]
+			}
 		}
 	}
 	return strArray
@@ -107,16 +112,28 @@ func (l *Level) addLine(index int, line []int, lineNext []int) bool {
 }
 
 func (l *Level) init(columns int) {
-	l.columns = columns
+	if columns == 3 {
+		l.pseudoColumns = true
+		l.columns = 4
+	} else {
+		l.pseudoColumns = false
+		l.columns = columns
+	}
 	l.lines = 5
 	l.matrix = make([]int, l.lines*l.columns)
 }
 
 func (l *Level) columnCheck(i int) bool {
 	elem := l.matrix[i]
+	identicalNum := 0
 	for i >= l.columns {
 		i -= l.columns
 		if elem == l.matrix[i] {
+			identicalNum++
+		}
+		if identicalNum > 0 && l.columns > 4 {
+			return false
+		} else if identicalNum > 1 {
 			return false
 		}
 	}
@@ -127,9 +144,15 @@ func (l *Level) pairCheck(i int) bool {
 	if i < 0 || i > l.columns*l.lines {
 		return false
 	}
+	identicalNum := 0
 	for j := i - 2; j > 0; j-- {
 		if j%l.columns != 0 && l.matrix[j] == l.matrix[i] &&
 			l.matrix[j-1] == l.matrix[i-1] {
+			identicalNum++
+		}
+		if identicalNum > 0 && l.columns > 5 {
+			return false
+		} else if identicalNum > 1 {
 			return false
 		}
 	}

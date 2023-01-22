@@ -98,7 +98,7 @@ var data TimeDataInput
 */
 
 func getWords(w http.ResponseWriter, r *http.Request, p httprouter.Params) {
-	const firstSeriesLen = 6
+	const firstSeriesLen = 3
 	const maxSeriesLen = 10
 
 	var responseData DataOutput
@@ -122,7 +122,7 @@ func getWords(w http.ResponseWriter, r *http.Request, p httprouter.Params) {
 
 	var l levels.Level
 	for i := 0; i < maxSeriesLen-firstSeriesLen+1; i++ {
-		l.New(i + 6)
+		l.New(i + firstSeriesLen)
 		var strs [][]string
 		switch data.Type {
 		case "1":
