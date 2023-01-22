@@ -51,6 +51,7 @@ func routes(r *httprouter.Router) {
 	r.POST("/get_fingers", getFingers)
 	r.GET("/download_file", downloadFile)
 
+	fmt.Println("Сервер запущен. Перейдите по адресу http://localhost:8181/")
 	err := http.ListenAndServe(":8181", r)
 	if err != nil {
 		panic(err)
@@ -118,7 +119,7 @@ func getWords(w http.ResponseWriter, r *http.Request, p httprouter.Params) {
 		fmt.Println(err.Error())
 		return
 	}
-	fmt.Println(data.Type)
+	//fmt.Println(data.Type)
 
 	var l levels.Level
 	for i := 0; i < maxSeriesLen-firstSeriesLen+1; i++ {
