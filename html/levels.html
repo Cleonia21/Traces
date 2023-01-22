@@ -12,58 +12,110 @@
 </head>
 <body>
 
-<header class="header">
-    <div class="container">
-        <div class="header_inner">
-            <div class="logo"></div>
-
+<div id="container">
+    <header>
+        <div id="header">
+            <div id="logo">
+                <a class="logoTitle" href="/" title="На главную">Traces.com</a>
+                <div>Сайт психологического тестирования</div>
+            </div>
         </div>
+    </header>
+
+    <div class="param">
+        <form>
+            <fieldset>
+                <legend>Параметры</legend>
+
+                <input type="radio" id="words" name="param" value="1" checked>
+                <label for="words">Слова</label><br>
+
+                <input type="radio" id="letters" name="param" value="2">
+                <label for="letters">Буквы</label><br>
+
+                <input type="radio" id="numbers" name="param" value="3" />
+                <label for="numbers">Цифры</label>
+
+            </fieldset>
+        </form>
     </div>
-</header>
 
-<div class="intro">
-    <div class="container">
-        <div class="intro_inner">
-            <button id="word_update">Обновить слова</button>
+    <div>
+        <button id="update">Обновить</button>
+<!--        <button id="fingers_update">Обновить пальцы</button>-->
+        <button id="download_file">Скачать файл</button>
+    </div>
+
+    <div class="result_container">
+        <div class="result_table">
+            <table id="word_table"></table>
         </div>
-        <table class="intro_title" id="word_table"></table>
-        <div class="intro_inner">
-            <button id="fingers_update">Обновить пальцы</button>
-        </div>
-        <table class="intro_title" id="fingers_table"></table>
-        <div class="intro_inner">
-            <button id="download_file">Скачать файл</button>
+        <div class="result_table">
+            <table id="fingers_table"></table>
         </div>
     </div>
 </div>
+
+
+<!--        <form>-->
+<!--            <fieldset>-->
+<!--                <legend>Choose your favorite monster</legend>-->
+
+<!--                <input type="radio" id="kraken" name="monster" value="K">-->
+<!--                <label for="kraken">Kraken</label><br>-->
+
+<!--                <input type="radio" id="sasquatch" name="monster" value="S">-->
+<!--                <label for="sasquatch">Sasquatch</label><br>-->
+
+<!--                <input type="radio" id="mothman" name="monster" value="M" />-->
+<!--                <label for="mothman">Mothman</label>-->
+<!--            </fieldset>-->
+<!--        </form>-->
+<!--    </div>-->
+
 
 </body>
 </html>
 {{end}}
 
-<!--            <nav>-->
-<!--                <a href="#">button1</a>-->
-<!--                <a href="#">button2</a>-->
-<!--                <a href="#">button3</a>-->
-<!--                <a href="#">button4</a>-->
-<!--                <a href="#">button5</a>-->
-<!--            </nav>-->
 
 
-<!--            <form class="button_title">-->
-<!--                <button onclick="loadMore()" >Обновить</button>-->
-<!--            </form>-->
-
-<!--            <div id="nextBatch"></div>-->
-
-<!--            <table class="intro_title">-->
-<!--                {{range .}}-->
-<!--                    <tr>-->
-<!--                        {{range .}}-->
-<!--                            <td>{{ . }}</td>-->
-<!--                        {{end}}-->
-<!--                    </tr>-->
-<!--                {{end}}-->
-<!--            </table>-->
 
 
+
+<!--<header class="header">-->
+<!--    <div class="container">-->
+<!--        <div class="logo"></div>-->
+<!--    </div>-->
+<!--</header>-->
+
+<!--<div class="param">-->
+<!--    <div class="buttons">-->
+<!--        <button id="word_update">Обновить слова</button>-->
+<!--        <button id="fingers_update">Обновить пальцы</button>-->
+
+<!--        <div class="download_button">-->
+<!--            <button id="download_file">Скачать файл</button>-->
+<!--        </div>-->
+<!--    </div>-->
+
+<!--    <form>-->
+<!--        <fieldset>-->
+<!--            <legend>Choose your favorite monster</legend>-->
+
+<!--            <input type="radio" id="kraken" name="monster" value="K">-->
+<!--            <label for="kraken">Kraken</label><br>-->
+
+<!--            <input type="radio" id="sasquatch" name="monster" value="S">-->
+<!--            <label for="sasquatch">Sasquatch</label><br>-->
+
+<!--            <input type="radio" id="mothman" name="monster" value="M" />-->
+<!--            <label for="mothman">Mothman</label>-->
+<!--        </fieldset>-->
+<!--    </form>-->
+<!--</div>-->
+
+<!--<div class="generate_result">-->
+<!--    <table class="intro_title" id="word_table"></table>-->
+<!--    <table class="intro_title" id="fingers_table"></table>-->
+<!--</div>-->

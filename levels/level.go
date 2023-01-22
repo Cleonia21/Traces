@@ -65,28 +65,6 @@ func (l *Level) getByAlphabet(m map[int]string) [][]string {
 	return strArray
 }
 
-func (l *Level) GetStrings() []string {
-	m := map[int]string{
-		0: "дом",
-		1: "кот",
-		2: "лес",
-		3: "стол",
-		4: "звон",
-		5: "брат",
-		6: "мост",
-		7: "час",
-		8: "вол",
-		9: "рев",
-	}
-	strs := make([]string, l.lines)
-	for i := 0; i < l.lines; i++ {
-		for j := 0; j < l.columns; j++ {
-			strs[i] += m[l.matrix[i*l.columns+j]] + " "
-		}
-	}
-	return strs
-}
-
 func (l *Level) New(columns int) {
 	//fmt.Println("New call with columns ", columns)
 	l.init(columns)

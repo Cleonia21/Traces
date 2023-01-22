@@ -10,11 +10,12 @@ import (
 	"os"
 	"path/filepath"
 	"strconv"
+	"strings"
 	"traces/levels"
 )
 
 type DataInput struct {
-	Text string
+	Type string
 }
 
 type DataOutput struct {
@@ -57,7 +58,7 @@ func routes(r *httprouter.Router) {
 }
 
 func downloadFile(w http.ResponseWriter, r *http.Request, p httprouter.Params) {
-	Filename := "last_level.docx"
+	Filename := "last_level.txt"
 
 	Openfile, err := os.Open(Filename) //Open the file to be downloaded later
 	defer Openfile.Close()             //Close after function return
@@ -85,6 +86,17 @@ func downloadFile(w http.ResponseWriter, r *http.Request, p httprouter.Params) {
 	io.Copy(w, Openfile) //'Copy' the file to the client
 }
 
+/*
+var data TimeDataInput
+   err := json.NewDecoder(request.Body).Decode(&data)
+   if err != nil {
+      fmt.Println(err.Error())
+      return
+   }
+   fmt.Println(data.Name)
+   fmt.Println(data.Time)
+*/
+
 func getWords(w http.ResponseWriter, r *http.Request, p httprouter.Params) {
 	const firstSeriesLen = 6
 	const maxSeriesLen = 10
@@ -93,27 +105,43 @@ func getWords(w http.ResponseWriter, r *http.Request, p httprouter.Params) {
 	responseData.Data = make([][][]string, maxSeriesLen-firstSeriesLen+1)
 	responseData.Result = "ok"
 
-	file, err := os.Create("last_level.docx")
+	file, err := os.Create("last_level.txt")
 	if err != nil {
 		fmt.Println("Unable to create file:", err)
 		os.Exit(1)
 	}
 	defer file.Close()
 
+	var data DataInput
+	err = json.NewDecoder(r.Body).Decode(&data)
+	if err != nil {
+		fmt.Println(err.Error())
+		return
+	}
+	fmt.Println(data.Type)
+
 	var l levels.Level
 	for i := 0; i < maxSeriesLen-firstSeriesLen+1; i++ {
 		l.New(i + 6)
-		responseData.Data[i] = l.GetWords()
-		//fmt.Println(l.GetNums())
+		var strs [][]string
+		switch data.Type {
+		case "1":
+			strs = l.GetWords()
+		case "2":
+			strs = l.GetLetters()
+		case "3":
+			strs = l.GetNums()
+		}
+		responseData.Data[i] = strs
 
-		strs := l.GetStrings()
 		for j := 0; j < len(strs); j++ {
-			_, err = file.WriteString(strs[j] + "\n")
+			_, err = file.WriteString(strings.Join(strs[j], " ") + "\n")
 			if err != nil {
 				fmt.Println("Unable to write file:", err)
 				os.Exit(1)
 			}
 		}
+		_, _ = file.WriteString("\n")
 	}
 	_ = json.NewEncoder(w).Encode(responseData)
 	return
@@ -130,7 +158,7 @@ func getFingers(w http.ResponseWriter, r *http.Request, p httprouter.Params) {
 	var l levels.Level
 	for i := 0; i < maxSeriesLen-firstSeriesLen+1; i++ {
 		l.New(i + 6)
-		responseData.Data[i] = l.GetWords()
+		responseData.Data[i] = l.GetNums()
 	}
 	_ = json.NewEncoder(w).Encode(responseData)
 	return
