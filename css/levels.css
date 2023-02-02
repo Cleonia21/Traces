@@ -11,15 +11,15 @@ body {
 }
 
 #container {
-    display: flex;
-    flex-direction: column;
+    /*display: flex;*/
+    /*flex-direction: column;*/
     width: 100%;
-    word-wrap: break-word;
-    background-color: #f0f0f0;;
+    /*word-wrap: break-word;*/
+    /*background-color: #f0f0f0;;*/
 }
 
-header {
-    display: block;
+#header {
+
 }
 
 #logo {
