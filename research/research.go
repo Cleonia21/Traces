@@ -2,11 +2,36 @@ package research
 
 import (
 	"fmt"
+	"time"
 )
 
 type Levels struct {
 	Words   [][][]int
 	Fingers [][][]int
+}
+
+func performance(columnNum int) {
+	var fingersLevel level
+	var averageVal float64
+	for i := 0; i < 100; i++ {
+		fingersLevel.init(columnNum)
+		fingersLevel.kind = fingersParamGet(columnNum)
+		start := time.Now()
+		fingersLevel.new()
+		duration := time.Since(start)
+		averageVal += duration.Seconds()
+	}
+	fmt.Printf("average time:%v\n", averageVal/100)
+}
+
+func GetFingerLevel(columnNum int) ([][]int, float64) {
+	var fingersLevel level
+	fingersLevel.init(columnNum)
+	fingersLevel.kind = fingersParamGet(columnNum)
+	start := time.Now()
+	mas := fingersLevel.new()
+	duration := time.Since(start)
+	return mas, duration.Seconds()
 }
 
 func Get() Levels {
@@ -18,40 +43,19 @@ func Get() Levels {
 	levels.Words[1] = getWords4()
 
 	var wordsLevel level
-	//var fingersLevel level
-
-	//fingersLevel.init(3)
-	//fingersLevel.kind = fingers{param{}}
-	//levels.Fingers[0] = fingersLevel.new()
-	//fingersLevel.init(4)
-	//fingersLevel.kind = fingers{}
-	//levels.Fingers[1] = fingersLevel.new()
+	var fingersLevel level
 
 	for i := 2; i < 7; i++ {
 		wordsLevel.init(i + 3)
-		//fingersLevel.init(i + 3)
-
 		wordsLevel.kind = wordsParamGet(i + 3)
-		//fingersLevel.kind = fingers{}
-
 		levels.Words[i] = wordsLevel.new()
-		//levels.Fingers[i] = fingersLevel.new()
 	}
-	return levels
-}
 
-func Get1() Levels {
-	var levels Levels
-	levels.Words = make([][][]int, 1)
-	levels.Fingers = make([][][]int, 1)
-
-	var fingersLevel level
-
-	fingersLevel.init(3)
-
-	//fingersLevel.kind = fingers{}
-
-	levels.Fingers[0] = fingersLevel.new()
+	for i := 0; i < 7; i++ {
+		fingersLevel.init(i + 3)
+		fingersLevel.kind = fingersParamGet(i + 3)
+		levels.Fingers[i] = fingersLevel.new()
+	}
 	return levels
 }
 

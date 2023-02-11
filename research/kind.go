@@ -67,7 +67,7 @@ func (w words) check(matrix [][]int, pos coordinate) bool {
 	return true
 }
 
-func (f fingers) check(pos coordinate, matrix [][]int) bool {
+func (f fingers) check(matrix [][]int, pos coordinate) bool {
 	if f.param.identNums_P == false && identNums_P(matrix, pos) {
 		return false
 	}

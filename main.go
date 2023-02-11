@@ -212,12 +212,19 @@ func arrayPrint(a [][]int) {
 	fmt.Println()
 }
 
+func printLevelWithTime(columnNum int) {
+	mas, time := research.GetFingerLevel(columnNum)
+	arrayPrint(mas)
+	fmt.Println("time:", time)
+}
+
 func main() {
 	levels := research.Get()
 
-	//for i := 0; i < len(levels.Words); i++ {
-	arrayPrint(levels.Words[5-3])
-	//arrayPrint(levels.Fingers[i])
-	//}
+	for i := 0; i < len(levels.Words); i++ {
+		arrayPrint(levels.Words[i])
+		arrayPrint(levels.Fingers[i])
+	}
 
+	//printLevelWithTime(10)
 }
