@@ -1,5 +1,10 @@
 package research
 
+import (
+	"math/rand"
+	"time"
+)
+
 var patterns = [][][]int{
 	{
 		{1, 2, 3, 4},
@@ -74,11 +79,28 @@ var patterns = [][][]int{
 }
 
 func getWords3() [][]int {
-	return patterns[0]
+	lev := getWords4()
+	for i, _ := range lev {
+		lev[i] = lev[i][:3]
+	}
+	return lev
 }
 
 func getWords4() [][]int {
-	return patterns[0]
+	mask := words{}.newRandLine(4)
+
+	rand.Seed(time.Now().UnixNano())
+	return PutMask(rand.Intn(len(patterns)), mask)
+}
+
+func PutMask(index int, mask []int) [][]int {
+	tmp := patterns[index]
+	for i, _ := range tmp {
+		for j, _ := range tmp[i] {
+			tmp[i][j] = mask[tmp[i][j]-1]
+		}
+	}
+	return tmp
 }
 
 /*

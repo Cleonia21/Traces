@@ -216,6 +216,8 @@ func main() {
 	levels := research.Get()
 
 	//for i := 0; i < len(levels.Words); i++ {
-	arrayPrint(levels.Words[2])
+	arrayPrint(levels.Words[5-3])
+	//arrayPrint(levels.Fingers[i])
 	//}
+
 }
