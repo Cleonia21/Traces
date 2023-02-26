@@ -1,4 +1,4 @@
-<!--{{define "home"}}-->
+{{define "home"}}
 <!doctype html>
 <html lang="en">
 <head>
@@ -14,108 +14,86 @@
 
 <div id="container">
     <header>
-        <div id="header">
-            <div id="logo">
-                <a class="logoTitle" href="/" title="На главную">Traces.com</a>
-<!--                <div>Сайт психологического тестирования</div>-->
-            </div>
+        <div id="logo">
+            <a class="logoTitle" href="/" title="На главную">Следы</a>
         </div>
     </header>
 
-    <div class="param">
-        <form>
-            <fieldset>
-                <legend>Параметры</legend>
-
-                <input type="radio" id="words" name="param" value="1" checked>
-                <label for="words">Слова</label><br>
-
-                <input type="radio" id="letters" name="param" value="2">
-                <label for="letters">Буквы</label><br>
-
-                <input type="radio" id="numbers" name="param" value="3" />
-                <label for="numbers">Цифры</label>
-
-            </fieldset>
-        </form>
-    </div>
-
-    <div>
-        <button id="update">Обновить</button>
-<!--        <button id="fingers_update">Обновить пальцы</button>-->
-        <button id="download_file">Скачать файл</button>
+    <div class="research_menu">
+        <button class="research_menu_button" id="word_button">Речевые</button>
+        <button class="research_menu_button">Кинестетические</button>
+        <button class="research_menu_button">&#8635;</button>
     </div>
 
     <div class="result_container">
-        <div class="result_table">
-            <table id="word_table"></table>
+        <div class="result_line" id="result_line_0">
+            <div class="result_line_text" id="result_line_text_0">
+                <div class="result_elem">1</div>
+                <div class="result_elem">2</div>
+                <div class="result_elem">3</div>
+                <div class="result_elem">4</div>
+                <div class="result_elem">5</div>
+            </div>
+            <div class="result_line_button">
+                <button class="result_button plus" onclick="ChangeColor('+', '0');">+</button>
+                <button class="result_button minus" onclick="ChangeColor('-', '0');">-</button>
+            </div>
         </div>
-        <div class="result_table">
-            <table id="fingers_table"></table>
+        <div class="result_line" id="result_line_1">
+            <div class="result_line_text" id="result_line_text_1">
+                <div class="result_elem">1</div>
+                <div class="result_elem">2</div>
+                <div class="result_elem">3</div>
+                <div class="result_elem">4</div>
+                <div class="result_elem">5</div>
+            </div>
+            <div class="result_line_button">
+                <button class="result_button plus" onclick="ChangeColor('+', '1');">+</button>
+                <button class="result_button minus" onclick="ChangeColor('-', '1');">-</button>
+            </div>
+        </div>
+        <div class="result_line" id="result_line_2">
+            <div class="result_line_text" id="result_line_text_2">
+                <div class="result_elem">1</div>
+                <div class="result_elem">2</div>
+                <div class="result_elem">3</div>
+                <div class="result_elem">4</div>
+                <div class="result_elem">5</div>
+            </div>
+            <div class="result_line_button">
+                <button class="result_button plus" onclick="ChangeColor('+', '2');">+</button>
+                <button class="result_button minus" onclick="ChangeColor('-', '2');">-</button>
+            </div>
+        </div>
+        <div class="result_line" id="result_line_3">
+            <div class="result_line_text" id="result_line_text_3">
+                <div class="result_elem">1</div>
+                <div class="result_elem">2</div>
+                <div class="result_elem">3</div>
+                <div class="result_elem">4</div>
+                <div class="result_elem">5</div>
+            </div>
+            <div class="result_line_button">
+                <button class="result_button plus" onclick="ChangeColor('+', '3');">+</button>
+                <button class="result_button minus" onclick="ChangeColor('-', '3');">-</button>
+            </div>
+        </div>
+        <div class="result_line" id="result_line_4">
+            <div class="result_line_text" id="result_line_text_4">
+                <div class="result_elem">1</div>
+                <div class="result_elem">2</div>
+                <div class="result_elem">3</div>
+                <div class="result_elem">4</div>
+                <div class="result_elem">5</div>
+            </div>
+            <div class="result_line_button">
+                <button class="result_button plus" onclick="ChangeColor('+', '4');">+</button>
+                <button class="result_button minus" onclick="ChangeColor('-', '4');">-</button>
+            </div>
         </div>
     </div>
 </div>
 
-
-<!--        <form>-->
-<!--            <fieldset>-->
-<!--                <legend>Choose your favorite monster</legend>-->
-
-<!--                <input type="radio" id="kraken" name="monster" value="K">-->
-<!--                <label for="kraken">Kraken</label><br>-->
-
-<!--                <input type="radio" id="sasquatch" name="monster" value="S">-->
-<!--                <label for="sasquatch">Sasquatch</label><br>-->
-
-<!--                <input type="radio" id="mothman" name="monster" value="M" />-->
-<!--                <label for="mothman">Mothman</label>-->
-<!--            </fieldset>-->
-<!--        </form>-->
-<!--    </div>-->
-
-
 </body>
 </html>
-<!--{{end}}-->
-
-
-
-
-
-
-<!--<header class="header">-->
-<!--    <div class="container">-->
-<!--        <div class="logo"></div>-->
-<!--    </div>-->
-<!--</header>-->
-
-<!--<div class="param">-->
-<!--    <div class="buttons">-->
-<!--        <button id="word_update">Обновить слова</button>-->
-<!--        <button id="fingers_update">Обновить пальцы</button>-->
-
-<!--        <div class="download_button">-->
-<!--            <button id="download_file">Скачать файл</button>-->
-<!--        </div>-->
-<!--    </div>-->
-
-<!--    <form>-->
-<!--        <fieldset>-->
-<!--            <legend>Choose your favorite monster</legend>-->
-
-<!--            <input type="radio" id="kraken" name="monster" value="K">-->
-<!--            <label for="kraken">Kraken</label><br>-->
-
-<!--            <input type="radio" id="sasquatch" name="monster" value="S">-->
-<!--            <label for="sasquatch">Sasquatch</label><br>-->
-
-<!--            <input type="radio" id="mothman" name="monster" value="M" />-->
-<!--            <label for="mothman">Mothman</label>-->
-<!--        </fieldset>-->
-<!--    </form>-->
-<!--</div>-->
-
-<!--<div class="generate_result">-->
-<!--    <table class="intro_title" id="word_table"></table>-->
-<!--    <table class="intro_title" id="fingers_table"></table>-->
-<!--</div>-->
+{{end}}

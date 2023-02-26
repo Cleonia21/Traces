@@ -59,6 +59,35 @@ func Get() Levels {
 	return levels
 }
 
+func GetWords() [][][]int {
+	mas := make([][][]int, 8)
+
+	mas[0] = getWords3()
+	mas[1] = getWords4()
+
+	var wordsLevel level
+
+	for i := 2; i < 8; i++ {
+		wordsLevel.init(i + 3)
+		wordsLevel.kind = wordsParamGet(i + 3)
+		mas[i] = wordsLevel.new()
+	}
+	return mas
+}
+
+func GetFingers() [][][]int {
+	mas := make([][][]int, 8)
+
+	var fingersLevel level
+
+	for i := 0; i < 7; i++ {
+		fingersLevel.init(i + 3)
+		fingersLevel.kind = fingersParamGet(i + 3)
+		mas[i] = fingersLevel.new()
+	}
+	return mas
+}
+
 type level struct {
 	lines   int
 	columns int
@@ -157,4 +186,26 @@ func (l *level) print() {
 		fmt.Println(l.matrix[i])
 	}
 	fmt.Println()
+}
+
+func arrayPrint(a [][]int) {
+	for i := 0; i < len(a); i++ {
+		fmt.Println(a[i])
+	}
+	fmt.Println()
+}
+
+func PrintFingersLevWithTime(columnNum int) {
+	mas, t := GetFingerLevel(columnNum)
+	arrayPrint(mas)
+	fmt.Println("t:", t)
+}
+
+func PrintAllLevels() {
+	levels := Get()
+
+	for i := 0; i < len(levels.Words) && i < len(levels.Fingers); i++ {
+		arrayPrint(levels.Words[i])
+		arrayPrint(levels.Fingers[i])
+	}
 }
