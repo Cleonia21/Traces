@@ -59,6 +59,22 @@ func Get() Levels {
 	return levels
 }
 
+func GetLevel(len int) [][]int {
+	if len < 3 {
+		fmt.Println("incorrect Level len")
+	} else if len == 3 {
+		return getWords3()
+	} else if len == 4 {
+		return getWords4()
+	} else {
+		var wordsLevel level
+		wordsLevel.init(len)
+		wordsLevel.kind = wordsParamGet(len)
+		return wordsLevel.new()
+	}
+	return nil
+}
+
 func GetWords() [][][]int {
 	mas := make([][][]int, 8)
 

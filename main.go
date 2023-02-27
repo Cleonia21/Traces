@@ -14,12 +14,12 @@ import (
 )
 
 type DataInput struct {
-	Type string
+	Len int
 }
 
 type DataOutput struct {
 	Result string
-	Data   [][][]int
+	Data   [][]int
 }
 
 func Home(w http.ResponseWriter, r *http.Request, p httprouter.Params) {
@@ -87,18 +87,18 @@ func downloadFile(w http.ResponseWriter, r *http.Request, p httprouter.Params) {
 }
 
 func getWords(w http.ResponseWriter, r *http.Request, p httprouter.Params) {
+	var data DataInput
+	err := json.NewDecoder(r.Body).Decode(&data)
+	if err != nil {
+		fmt.Println(err.Error())
+		//return
+	}
+	fmt.Println("data.len", data.Len)
+	fmt.Println(data)
 	var responseData DataOutput
-	responseData.Data = research.GetWords()
-	fmt.Println(responseData.Data[2])
+	responseData.Data = research.GetLevel(data.Len)
+	fmt.Println(responseData.Data)
 	responseData.Result = "ok"
-
-	//var data DataInput
-	//err := json.NewDecoder(r.Body).Decode(&data)
-	//if err != nil {
-	//	fmt.Println(err.Error())
-	//	return
-	//}
-	//fmt.Println(data.Type)
 
 	_ = json.NewEncoder(w).Encode(responseData)
 	return

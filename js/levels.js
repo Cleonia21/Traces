@@ -11,6 +11,7 @@ a.getElementsByClassName("result_elem")[0].textContent = "Daaaa"
  */
 
 const lines_answers = []
+// let research
 
 function ChangeColor(type, elem) {
     let line = document.getElementById("result_line_text_" + elem.toString())
@@ -28,31 +29,39 @@ function ChangeColor(type, elem) {
 }
 
 word_button.onclick = async function () {
-    await aggregate("/get_words")
+    await get_words(3)
 }
 
-async function aggregate(addr) {
-    let response = await fetch(addr, {method: "POST"});
+async function get_words(len) {
+    let param = { len: len }
+    let response = await fetch("/get_words", {
+        method: "POST",
+        body: JSON.stringify(param)
+    });
 
     if (response.ok) {
         response.text().then(function (data) {
             let result = JSON.parse(data);
 
             if (result.Result === "ok") {
-                for (let i = 0; i < result.Data[2].length; i++) {
-                    if (result.Data[0][i] == null)
+                for (let i = 0; i < result.Data.length; i++) {
+                    if (result.Data[i] == null)
                         break
 
                     const line = document.getElementById("result_line_" + i.toString())
-                    let elems = line.getElementsByClassName("result_elem")
                     let text = line.getElementsByClassName("result_line_text")
                     text[0].style.backgroundColor = '#bdb491';
+                    while (text[0].firstChild) {
+                        text[0].removeChild(text[0].firstChild)
+                    }
 
-                    for (let j = 0; j < result.Data[2][i].length; j++) {
-                        if (result.Data[2][i][j] == null)
-                            break
-
-                        elems[j].textContent = result.Data[2][i][j]
+                    for (let j = 0; j < result.Data[i].length; j++) {
+                        if (result.Data[i][j] == null)
+                            break;
+                        var elem = document.createElement("div");
+                        elem.className = "result_elem";
+                        elem.textContent = convertToLetter(result.Data[i][j]);
+                        text[0].appendChild(elem);
                     }
                 }
             }
@@ -61,6 +70,7 @@ async function aggregate(addr) {
         console.log(response.status)
     }
 }
+
 
 /*
 // const fingers_update = document.getElementById("fingers_update")
