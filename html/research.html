@@ -1,0 +1,103 @@
+{{define "res"}}
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <link rel="stylesheet" href="/css/levels.css">
+    <script src="../js/levels.js" defer></script>
+    <script src="../js/converter.js" defer></script>
+    <script src="../js/select.js" defer></script>
+    <script src="../js/level_menu.js" defer></script>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@100&display=swap" rel="stylesheet">
+    <title>Traces</title>
+</head>
+<body>
+
+<div id="container">
+    <header>
+        <div id="menu">
+            <div id="logo"><a href="/" title="На главную">Следы</a></div>
+            <div id="research"><a href="research" title="К иследованию">Исследование</a></div>
+        </div>
+    </header>
+
+    <div class="series_container">
+        <div id="line1"></div>
+
+        <div id="research_navigation">
+            <div class="navigation_elem" id="w">слухоречевые</div>
+            <div class="navigation_elem" id="f">кинестетические</div>
+            <div class="navigation_elem" id="v">зрительные</div>
+        </div>
+
+        <h1>Заполнение</h1>
+
+        <div id="series_field">
+            <button class="series_elem">с</button>
+            <button class="series_elem">д</button>
+            <button class="series_elem">к</button>
+        </div>
+
+        <div id="level_menu">
+            <div class="level_menu_button_area" id="tab" ><input class="level_menu_button" type="image" src="../img/tab.png" alt="Кнопка фокус"></div>
+            <div class="level_menu_button_area" id="arrow_up"><input class="level_menu_button" type="image" src="../img/arrow_up.png" alt="Кнопка вверх"></div>
+            <div class="level_menu_button_area" id="arrow_down"><input class="level_menu_button" type="image" src="../img/arrow_down.png" alt="Кнопка вниз"></div>
+            <div class="level_menu_button_area" id="fill"><input class="level_menu_button" type="image" src="../img/add.png" alt="Кнопка заполнить"></div>
+            <div class="level_menu_button_area" id="erase"><input class="level_menu_button" type="image" src="../img/backspace.png" alt="Кнопка стереть"></div>
+            <div class="level_menu_button_area" id="clear"><input class="level_menu_button" type="image" src="../img/delete.png" alt="Кнопка удалить"></div>
+            <div class="level_menu_button_area" id="complete"><input class="level_menu_button" type="image" src="../img/enter.png" alt="Кнопка готово"></div>
+        </div>
+
+        <div class="series_input_container">
+            <input class="series_input" id="input_1" tabindex="1" spellcheck="false" autofocus>
+        </div>
+        <div class="series_input_container">
+            <input class="series_input" id="input_2" tabindex="2" spellcheck="false">
+        </div>
+        <div class="series_input_container">
+            <input class="series_input" id="input_3" placeholder="интерференция" tabindex="3" spellcheck="false">
+        </div>
+        <div class="series_input_container">
+            <input class="series_input" id="input_4" placeholder="интерференция" tabindex="4" spellcheck="false">
+        </div>
+
+        <div id="line2"></div>
+
+        <h1>Навигация</h1>
+
+        <div class="level_preview">
+            <div id="before">
+                <div class="preview_row">aaas</div>
+                <div class="preview_row">aaas</div>
+                <div class="preview_row">aaas</div>
+                <div class="preview_row">aaas</div>
+                <div class="preview_row" style="border-bottom: none">aaas</div>
+            </div>
+            <div id="current">
+                <div class="preview_row">aaass</div>
+                <div class="preview_row">aaass</div>
+                <div class="preview_row">aaafs</div>
+                <div class="preview_row">adaas</div>
+                <div class="preview_row" style="border-bottom: none">aafas</div>
+            </div>
+            <div id="after">
+                <div class="preview_row">abchfg</div>
+                <div class="preview_row">abchfg</div>
+                <div class="preview_row">aaadsf</div>
+                <div class="preview_row">aaasdf</div>
+                <div class="preview_row" style="border-bottom: none">aasdfa</div>
+            </div>
+
+        </div>
+
+        <div id="line3"></div>
+
+    </div>
+
+</div>
+
+</body>
+</html>
+{{end}}

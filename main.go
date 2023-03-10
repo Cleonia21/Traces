@@ -13,17 +13,18 @@ import (
 	"traces/research"
 )
 
-type DataInput struct {
-	Len int
-}
-
 type DataOutput struct {
 	Result string
-	Data   [][]int
+	Data   [][][]int
+}
+
+type DataResearch struct {
+	Result string
+	Levels research.Levels
 }
 
 func Home(w http.ResponseWriter, r *http.Request, p httprouter.Params) {
-	home := filepath.Join("html", "levels.html")
+	home := filepath.Join("html", "home.html")
 
 	tmpl, err := template.ParseFiles(home)
 	if err != nil {
@@ -38,6 +39,22 @@ func Home(w http.ResponseWriter, r *http.Request, p httprouter.Params) {
 	}
 }
 
+func Research(w http.ResponseWriter, r *http.Request, p httprouter.Params) {
+	res := filepath.Join("html", "research.html")
+
+	tmpl, err := template.ParseFiles(res)
+	if err != nil {
+		http.Error(w, err.Error(), 400)
+		return
+	}
+
+	err = tmpl.ExecuteTemplate(w, "res", nil) //data - передаваемый объект в шаблон
+	if err != nil {
+		http.Error(w, err.Error(), 400)
+		return
+	}
+}
+
 func routes(r *httprouter.Router) {
 	//путь к папке со внешними файлами: html, js, css, изображения и т.д.
 	r.ServeFiles("/css/*filepath", http.Dir("css"))
@@ -45,9 +62,11 @@ func routes(r *httprouter.Router) {
 	r.ServeFiles("/img/*filepath", http.Dir("img"))
 	//что следует выполнять при входящих запросах указанного типа и по указанному адресу
 	r.GET("/", Home)
+	r.GET("/research", Research)
 
 	r.POST("/get_words", getWords)
 	//r.POST("/get_fingers", getFingers)
+	r.POST("/get_research", getResearch)
 	r.GET("/download_file", downloadFile)
 
 	fmt.Println("Сервер запущен. Перейдите по адресу http://localhost:8181/")
@@ -86,43 +105,25 @@ func downloadFile(w http.ResponseWriter, r *http.Request, p httprouter.Params) {
 	io.Copy(w, Openfile) //'Copy' the file to the client
 }
 
-func getWords(w http.ResponseWriter, r *http.Request, p httprouter.Params) {
-	var data DataInput
-	err := json.NewDecoder(r.Body).Decode(&data)
-	if err != nil {
-		fmt.Println(err.Error())
-		//return
-	}
-	fmt.Println("data.len", data.Len)
-	fmt.Println(data)
-	var responseData DataOutput
-	responseData.Data = research.GetLevel(data.Len)
-	fmt.Println(responseData.Data)
+func getResearch(w http.ResponseWriter, r *http.Request, p httprouter.Params) {
+	var responseData DataResearch
+	responseData.Levels = research.Get()
+	fmt.Println(responseData.Levels)
 	responseData.Result = "ok"
 
 	_ = json.NewEncoder(w).Encode(responseData)
 	return
 }
 
-//
-//func writeFile(d DataOutput) {
-//
-//	file, err := os.Create("last_level.txt")
-//	if err != nil {
-//		fmt.Println("Unable to create file:", err)
-//		os.Exit(1)
-//	}
-//	defer file.Close()
-//
-//	for j := 0; j < len(strs); j++ {
-//		_, err = file.WriteString(strings.Join(strs[j], " ") + "\n")
-//		if err != nil {
-//			fmt.Println("Unable to write file:", err)
-//			os.Exit(1)
-//		}
-//	}
-//	_, _ = file.WriteString("\n")
-//}
+func getWords(w http.ResponseWriter, r *http.Request, p httprouter.Params) {
+	var responseData DataOutput
+	responseData.Data = research.GetWords()
+	fmt.Println(responseData.Data)
+	responseData.Result = "ok"
+
+	_ = json.NewEncoder(w).Encode(responseData)
+	return
+}
 
 func handleRequest() {
 	//http.HandleFunc("/", homePage)

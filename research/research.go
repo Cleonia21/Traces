@@ -8,6 +8,7 @@ import (
 type Levels struct {
 	Words   [][][]int
 	Fingers [][][]int
+	Visual  [][][]int
 }
 
 func performance(columnNum int) {
@@ -36,43 +37,23 @@ func GetFingerLevel(columnNum int) ([][]int, float64) {
 
 func Get() Levels {
 	var levels Levels
-	levels.Words = make([][][]int, 8)
-	levels.Fingers = make([][][]int, 8)
-
-	levels.Words[0] = getWords3()
-	levels.Words[1] = getWords4()
-
-	var wordsLevel level
-	var fingersLevel level
-
-	for i := 2; i < 7; i++ {
-		wordsLevel.init(i + 3)
-		wordsLevel.kind = wordsParamGet(i + 3)
-		levels.Words[i] = wordsLevel.new()
-	}
-
-	for i := 0; i < 7; i++ {
-		fingersLevel.init(i + 3)
-		fingersLevel.kind = fingersParamGet(i + 3)
-		levels.Fingers[i] = fingersLevel.new()
-	}
+	levels.Words = GetWords()
+	levels.Fingers = GetFingers()
+	levels.Visual = GetEmptyLevels()
 	return levels
 }
 
-func GetLevel(len int) [][]int {
-	if len < 3 {
-		fmt.Println("incorrect Level len")
-	} else if len == 3 {
-		return getWords3()
-	} else if len == 4 {
-		return getWords4()
-	} else {
-		var wordsLevel level
-		wordsLevel.init(len)
-		wordsLevel.kind = wordsParamGet(len)
-		return wordsLevel.new()
+func GetEmptyLevels() [][][]int {
+	mas := make([][][]int, 8)
+
+	var wordsLevel level
+
+	for i := 0; i < 8; i++ {
+		wordsLevel.init(i + 3)
+		mas[i] = wordsLevel.matrix
 	}
-	return nil
+
+	return mas
 }
 
 func GetWords() [][][]int {
@@ -96,7 +77,7 @@ func GetFingers() [][][]int {
 
 	var fingersLevel level
 
-	for i := 0; i < 7; i++ {
+	for i := 0; i < 8; i++ {
 		fingersLevel.init(i + 3)
 		fingersLevel.kind = fingersParamGet(i + 3)
 		mas[i] = fingersLevel.new()

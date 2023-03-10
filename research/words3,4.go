@@ -94,10 +94,11 @@ func getWords4() [][]int {
 }
 
 func PutMask(index int, mask []int) [][]int {
-	tmp := patterns[index]
-	for i, _ := range tmp {
-		for j, _ := range tmp[i] {
-			tmp[i][j] = mask[tmp[i][j]-1]
+	tmp := make([][]int, 5)
+	for i, _ := range patterns[index] {
+		tmp[i] = make([]int, 4)
+		for j, _ := range patterns[index][i] {
+			tmp[i][j] = mask[patterns[index][i][j]-1]
 		}
 	}
 	return tmp

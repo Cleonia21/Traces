@@ -15,6 +15,7 @@ converter.words.set(9, "вол")
 converter.words.set(10, "рев")
 
 converter.letters = new Map()
+converter.letters.set(0, "")
 converter.letters.set(1, "д")
 converter.letters.set(2, "л")
 converter.letters.set(3, "к")

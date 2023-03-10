@@ -10,6 +10,10 @@ body {
     overflow-x: hidden;
 }
 
+div {
+    display: block;
+}
+
 #container {
     display: flex;
     flex-direction: column;
@@ -19,140 +23,245 @@ body {
     /*background-color: #f0f0f0;;*/
 }
 
+header {
+
+}
+
+#menu {
+    width: 100%;
+    display: flex;
+
+    /*justify-content: center;*/
+    align-items: baseline;
+    /*align-content: center;*/
+}
+
+
 #logo {
     height: 50px;
     margin-left: 3px;
     font-weight: bold;
     margin-bottom: 10px;
-    font-size: 16px;
 }
-
-.research_menu {
-    margin: 100px 0 20px 0;
-}
-
-.research_menu_button {
-    font-size: 13pt;
-    height: 30px;
-    border-radius: 10px;
-    border: 1px solid #000000;
-    background-color: #a9a161;
-}
-
-.result_container {
-    display: flex;
-    flex-direction: column;
-    align-items: stretch;
-    justify-content: space-evenly;
-
-    /*width: auto;*/
-    /*height: auto;*/
-
-    margin: 5px;
-    padding: 5px;
-    /*border: 2px solid #bb0c0c;*/
-}
-
-.result_line {
-    display: flex;
-    align-items: stretch;
-    justify-content: space-between;
-
-    margin: 5px;
-    padding: 2px;
-    /*border: 1px solid #000000;*/
-
-    font-size: 20pt;
-}
-
-.result_elem {
-    padding: 5px;
-    /*font-weight: 900;*/
-    /*font-family: inherit;*/
-}
-
-.result_line_text {
-    flex: 1;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-
-    border-radius: 10px;
-    border: 1px solid #000000;
-
-    padding: 0 5px;
-
-    background-color: #bdb491;
-    color: #000000;
-
-    -webkit-transition-duration: 0.1s; /* Safari */
-    transition-duration: 0.1s;
-}
-
-.result_line_button {
-    display: flex;
-    align-items: stretch;
-
-    padding-left: 5px;
-}
-
-.result_button {
-    width: 30px;
-    border: none;
-    -webkit-transition-duration: 0.3s; /* Safari */
-    transition-duration: 0.3s;
-}
-
-.result_button.plus {
-    border-radius: 10px 0 0 10px;
-    background-color: #0dd210;
-    border: 1px solid #000000;
-    border-right-width: 0;
-}
-
-.result_button.plus:hover {
-    background-color: #0bb60e;
-}
-
-.result_button.minus {
-    border-radius: 0 10px 10px 0;
-    background-color: #d20d0d;
-    border: 1px solid #000000;
-}
-
-.result_button.minus:hover {
-    background-color: #b40b0b;
-}
-
-
-
-
-
-
-
-.param {
-    padding: 1em;
-    max-width: 200px;
-    /*display: flex;*/
-    /*flex-direction: row;*/
-    /*justify-content: space-around;*/
-}
-
 #logo a, #logo a:visited {
     color: #444;
     font-size: 40px;
 }
 
-div {
-    display: block;
+#research {
+    height: 50px;
+    font-weight: bold;
+    margin-left: 10px;
+
+}
+#research a, #research a:visited {
+    color: #444;
+    font-size: 30px;
 }
 
-a {
-    color: navy;
+
+#research_navigation {
+    margin-top: 30px;
+    margin-bottom: 20px;
+
+    display: flex;
+
+}
+.navigation_elem {
+    padding: 10px 20px;
+    background-color: #e5e5e5;
 }
 
-/*a:-webkit-any-link {*/
-/*    color: -webkit-link;*/
-/*    !*cursor: pointer;*!*/
-/*    text-decoration: underline;*/
-/*}*/
+
+
+.series_container {
+    width: 100%;
+
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: flex-start;
+
+    background-color: #d9d8d8;
+}
+
+#series_field {
+    display: flex;
+    align-items: stretch;
+    justify-content: center;
+
+    /*margin-bottom: 15px;*/
+    /*padding: 5px;*/
+
+    /*font-size: 20pt;*/
+
+}
+
+.series_elem {
+    width: 35px;
+    height: 35px;
+
+    border: none;
+    border-radius: 2px;
+    margin: 5px 5px 15px;
+
+    font-size: 16pt;
+
+    color: #000000;
+    background-color: #e5e5e5;
+
+    cursor: pointer;
+    box-shadow: 0 0 5px 5px #cecece;
+}
+
+.series_elem:hover {
+    background-color: #d7d7d7;
+    /*border: 2px solid #313131;*/
+}
+
+#level_menu {
+    display: flex;
+    /*margin-bottom: 20px;*/
+    border-top: 2px solid rgb(128, 128, 128);
+    /*padding: 15px 15px 0 15px;*/
+}
+
+/*<a href="https://www.flaticon.com/ru/free-icons/ui" title="ui иконки">Ui иконки от Freepik - Flaticon</a>*/
+
+
+
+.level_menu_button {
+    width: 35px;
+    height: 35px;
+
+    border-radius: 2px;
+
+    background-color: #e5e5e5;
+    box-shadow: 0 0 7px 7px #cecece;
+}
+
+.level_menu_button_area {
+    padding: 10px 5px;
+    cursor: pointer;
+}
+
+.level_menu_button_area:hover .level_menu_button {
+    background-color: #d9d8d8;
+}
+
+
+
+
+
+.series_input_container {
+    display: flex;
+
+    border: 2px solid rgb(128, 128, 128);
+    /*border-radius: 10px;*/
+
+    background-color: #e5e5e5;
+    margin-bottom: 10px;
+    padding: 3px;
+
+    box-shadow: 0 0 7px 7px #cecece;
+}
+
+.series_input {
+    text-align: center;
+    font-size: 16pt;
+
+    background-color: #e5e5e5;
+    width: 200px;
+
+    /*border: 2px solid rgb(128, 128, 128);*/
+    /*border-radius: 10px;*/
+    border: none;
+    outline: none;
+
+    letter-spacing: 4px;
+}
+
+.series_input::placeholder {
+    font-size: 14pt;
+    letter-spacing: normal;
+}
+
+.clear_button, .fill_button {
+    border: none;
+    background-color: #e5e5e5;
+    color: rgb(128, 128, 128);
+    border-radius: 10px;
+    cursor: pointer;
+}
+
+.clear_button:hover, .fill_button:hover {
+    /*color: #e5e5e5;*/
+    background-color: #d9d8d8;
+}
+
+
+
+
+
+
+
+
+
+
+
+#line1, #line2, #line3 {
+    height: 2px;
+    width: 100%;
+    background-color: rgb(128, 128, 128);
+}
+
+#line2 {
+    margin-top: 30px;
+}
+
+#line3 {
+    margin-top: 30px;
+}
+
+
+.level_preview {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+#before, #current, #after {
+    overflow: hidden;
+
+    margin: 0 20px 0 20px;
+
+    /*border: 2px solid rgb(128, 128, 128);*/
+    /*border-radius: 10px;*/
+
+    display: flex;
+    flex-direction: column;
+    justify-content: space-evenly;
+
+    box-shadow: 0 0 5px 5px #cecece;
+}
+
+.preview_row {
+    display: flex;
+    justify-content: center;
+
+    min-width: 50px;
+    padding: 10px;
+
+    background-color: #f5f5f5;
+
+    letter-spacing: 2px;
+    font-size: 12pt;
+
+    border-bottom: 2px solid rgb(128, 128, 128)
+}
+
+
+
+
+
+
