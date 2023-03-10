@@ -55,6 +55,22 @@ func Research(w http.ResponseWriter, r *http.Request, p httprouter.Params) {
 	}
 }
 
+func ResearchResults(w http.ResponseWriter, r *http.Request, p httprouter.Params) {
+	results := filepath.Join("html", "results.html")
+
+	tmpl, err := template.ParseFiles(results)
+	if err != nil {
+		http.Error(w, err.Error(), 400)
+		return
+	}
+
+	err = tmpl.ExecuteTemplate(w, "results", nil) //data - передаваемый объект в шаблон
+	if err != nil {
+		http.Error(w, err.Error(), 400)
+		return
+	}
+}
+
 func routes(r *httprouter.Router) {
 	//путь к папке со внешними файлами: html, js, css, изображения и т.д.
 	r.ServeFiles("/css/*filepath", http.Dir("css"))
@@ -63,6 +79,7 @@ func routes(r *httprouter.Router) {
 	//что следует выполнять при входящих запросах указанного типа и по указанному адресу
 	r.GET("/", Home)
 	r.GET("/research", Research)
+	r.GET("/research/results", ResearchResults)
 
 	r.POST("/get_words", getWords)
 	//r.POST("/get_fingers", getFingers)

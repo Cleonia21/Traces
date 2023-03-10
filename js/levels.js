@@ -86,13 +86,13 @@ class Research {
                 }
             }
         }
-
         this.#history = new History(null, this.#levels[0], this.#levels[1])
     }
 
-    // get #type() {
-    //     return this.#type;
-    // }
+    localSave() {
+        this.#levels.length = this.#levItr + 1;
+        localStorage.setItem(this.#type, JSON.stringify(this.#levels))
+    }
 
     #createElem(content) {
         let elem = document.createElement("button");
@@ -152,6 +152,8 @@ class Research {
             series.answers[i] = inputs[i].value
             if (series.str === inputs[i].value)
                 series.answers[i] = "+"
+            if (inputs[i].value === "")
+                series.answers[i] = "-"
             inputs[i].value = ""
         }
 
@@ -195,10 +197,12 @@ class ResearchHub {
     }
 
     next() {
-        if (this.#current[this.#itr].get_input() === false) {//alert("Текущее исследование завершено");
+        if (this.#current[this.#itr].get_input() === false) {
+            this.#current[this.#itr].localSave();
             this.#itr++;
             if (this.#itr === 3) {
                 alert("Исследование завершено полностью");
+                window.location.href = "/research/results";
                 this.#itr--; //Переход к результатам
             } else {
                 this.#current[this.#itr].put_series()

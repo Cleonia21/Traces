@@ -41,8 +41,3 @@ document.getElementById("fill").onclick = function () {
     focus_inpt.value = "+";
     change_focus(1);
 }
-
-document.getElementById("tab").onclick = function () {
-    focus_inpt.focus();
-}
-
