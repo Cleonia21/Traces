@@ -139,7 +139,7 @@ class Research {
             }
 
             correctAnswers += tmpCorrectAnswers;
-            if (correctAnswers === answers.length)
+            if (tmpCorrectAnswers === answers.length)
                 fullySeries = true;
         }
         return fullySeries === true || correctAnswers >= 5;
@@ -152,7 +152,7 @@ class Research {
             series.answers[i] = inputs[i].value
             if (series.str === inputs[i].value)
                 series.answers[i] = "+"
-            if (inputs[i].value === "")
+            if (inputs[i].value === "" || inputs[i].value[0] === "*")
                 series.answers[i] = "-"
             inputs[i].value = ""
         }

@@ -5,11 +5,8 @@ import (
 	"fmt"
 	"github.com/julienschmidt/httprouter"
 	"html/template"
-	"io"
 	"net/http"
-	"os"
 	"path/filepath"
-	"strconv"
 	"traces/research"
 )
 
@@ -91,35 +88,6 @@ func routes(r *httprouter.Router) {
 	if err != nil {
 		panic(err)
 	}
-}
-
-func downloadFile(w http.ResponseWriter, r *http.Request, p httprouter.Params) {
-	Filename := "last_level.txt"
-
-	Openfile, err := os.Open(Filename) //Open the file to be downloaded later
-	defer Openfile.Close()             //Close after function return
-
-	if err != nil {
-		http.Error(w, "File not found.", 404) //return 404 if file is not found
-		return
-	}
-
-	tempBuffer := make([]byte, 512) //Create a byte array to read the file later
-	_, err = Openfile.Read(tempBuffer)
-	if err != nil {
-		panic(err)
-	} //Read the file into  byte
-	FileContentType := http.DetectContentType(tempBuffer) //Get file header
-
-	FileStat, _ := Openfile.Stat()                     //Get info from file
-	FileSize := strconv.FormatInt(FileStat.Size(), 10) //Get file size as a string
-
-	//Set the headers
-	w.Header().Set("Content-Type", FileContentType+";"+Filename)
-	w.Header().Set("Content-Length", FileSize)
-
-	Openfile.Seek(0, 0)  //We read 512 bytes from the file already so we reset the offset back to 0
-	io.Copy(w, Openfile) //'Copy' the file to the client
 }
 
 func getResearch(w http.ResponseWriter, r *http.Request, p httprouter.Params) {

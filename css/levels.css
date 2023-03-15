@@ -10,7 +10,7 @@ body {
     overflow-x: hidden;
 }
 
-#start_button {
+.start_button {
     margin-top: 100px;
     padding: 30px;
     background-color: #b2b2b2;
